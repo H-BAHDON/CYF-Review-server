@@ -1,12 +1,10 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-app.use(cors());
 const bodyParser = require("body-parser");
-app.use(bodyParser.json());
-const videos = require("../exampleresponse.json");
-app.use(express.json());
-const port = 3000;
+const PORT = 3001;
+const Pool = new sql.ConnectionPool(config/string)
+
 const db = new Pool({
   user: "",
   host: "",
@@ -17,6 +15,11 @@ const db = new Pool({
     rejectUnauthorized: false,
   },
 });
+
+app.use(cors());
+app.use(express.json());
+app.use(bodyParser.json());
+
 
 
 app.get("/", function (req, res) {
@@ -29,6 +32,12 @@ pp.get("/reviews", async function (req, res) {
     return res.status(404).json({ error: "no reviews" });
   }
     return res.status(200).json(result.rows);
-  } 
+  }
 );
+
+
+app.listen(PORT, function(err){
+  if (err) console.log("Error in server setup")
+  console.log("Server listening on Port", PORT);
+})
 
